@@ -1,6 +1,7 @@
 package generate.password;
 
 import generate.backend.Backend;
+import generate.backend.PasswordGenerator;
 import generate.ui.Front;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -79,7 +80,7 @@ public class Main extends Application {
         generatePasswordButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                servicePasswordField.setText(front.generatePassowrd());
+                servicePasswordField.setText(PasswordGenerator.generateRandomString(16));
             }
         });
 

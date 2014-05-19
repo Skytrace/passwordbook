@@ -38,11 +38,6 @@ public class Front {
         return listFields;
     }
 
-    public String generatePassowrd() {
-        Random randomGenerator = new Random();
-        return Integer.toString(randomGenerator.nextInt(1280000));
-    }
-
     public List<String> getListOfServices() {
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < backend.parseXML().size(); i++) {

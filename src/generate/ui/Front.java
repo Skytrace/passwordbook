@@ -1,10 +1,14 @@
 package generate.ui;
 
 import generate.backend.Backend;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,6 +18,7 @@ public class Front {
     private DocumentBuilder documentBuilder;
     private List<TextField> listFields;;
     private Backend backend;
+    private static Frame frame;
 
     public Front() throws Exception {
         backend = new Backend();
@@ -45,5 +50,26 @@ public class Front {
         }
         return list;
     }
+
+    public boolean isServiceName(String serviceName, String servicePassword) {
+        return serviceName.equals("") || serviceName == null || servicePassword.equals("") || servicePassword == null;
+    }
+
+    public static void serviceNameModalWindow() {
+        frame = new JFrame();
+        JOptionPane.showMessageDialog(frame,
+                "Service name should not be empty",
+                "Warning",
+                JOptionPane.WARNING_MESSAGE);
+    }
+
+    public static void storageNotFoundModalWindow(Exception e) {
+        frame = new JFrame();
+        JOptionPane.showMessageDialog(frame,
+                e.getMessage(),
+                "XML error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
 
 }

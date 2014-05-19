@@ -1,5 +1,6 @@
 package generate.backend;
 
+import generate.ui.Front;
 import org.w3c.dom.*;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
@@ -53,12 +54,7 @@ public class Backend {
                 }
             }
         } catch (Exception e) {
-            Frame frame = new JFrame("Title");
-            JOptionPane.showMessageDialog(frame,
-                    e.getMessage(),
-                    "XML error",
-                    JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            Front.storageNotFoundModalWindow(e);
         }
         return list;
     }
@@ -88,8 +84,8 @@ public class Backend {
         document = documentBuilderFactory.parse(file);
         XPathFactory xpf = XPathFactory.newInstance();
         XPath xpath = xpf.newXPath();
-        XPathExpression expression = xpath.compile(String.format("//services/service[name[text()='%s']]", serviceName));
-        Node node = (Node) expression.evaluate(document, XPathConstants.NODE);
+        XPathExpression serviceNameLocator = xpath.compile(String.format("//services/service[name[text()='%s']]", serviceName));
+        Node node = (Node) serviceNameLocator.evaluate(document, XPathConstants.NODE);
         node.getParentNode().removeChild(node);
 
         transformerFactory = TransformerFactory.newInstance();
